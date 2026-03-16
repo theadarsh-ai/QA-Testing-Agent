@@ -1,8 +1,8 @@
-# DesignGuard: The Autonomous QA Engineer
+# QA Testing Agent: The Autonomous QA Engineer
 
 > **A State-Driven, Multi-Agent Visual & Functional Testing Platform**
 
-DesignGuard is not a testing tool; it is an **Autonomous QA Engineer**. It perceives web applications with a human-like visual understanding while inspecting them with surgical technical precision. Built on a sophisticated **LangGraph** orchestration, it eliminates manual test scripts by "thinking" its way through your product to find regressions, vulnerabilities, and accessibility gaps.
+This is not a testing tool; it is an **Autonomous QA Engineer**. It perceives web applications with a human-like visual understanding while inspecting them with surgical technical precision. Built on a sophisticated **LangGraph** orchestration, it eliminates manual test scripts by "thinking" its way through your product to find regressions, vulnerabilities, and accessibility gaps.
 
 ---
 
