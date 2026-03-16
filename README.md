@@ -8,7 +8,7 @@ This is not a testing tool; it is an **Autonomous QA Engineer**. It perceives we
 
 ## 🏗️ Technical Architecture: The LangGraph Brain
 
-Unlike legacy QA automation that follows a linear path, DesignGuard uses a **State-Driven Orchestrator (LangGraph)**. This allows the agent to:
+Unlike legacy QA automation that follows a linear path, My Agent uses a **State-Driven Orchestrator (LangGraph)**. This allows the agent to:
 - **Observe**: Scan the initial environment and handle dynamic redirects.
 - **Navigate**: Deep-crawl the site using a **Playwright-powered Autonomous Navigator**.
 - **Detect**: Parallelize inspections across 4 specialist agents.
@@ -98,10 +98,10 @@ pnpm build
 The entire environment is containerized for zero-config testing:
 ```bash
 # Build the container
-docker build -t designguard .
+docker build -t  .
 
 # Run the container
-docker run -p 8080:8080 -e GEMINI_API_KEY=your_key designguard
+docker run -p 8080:8080 -e GEMINI_API_KEY=your_key 
 ```
 Access the UI at `http://localhost:8080`.
 
@@ -120,4 +120,4 @@ Access the UI at `http://localhost:8080`.
 - **Cloud-Scale Infra**: Running full-blown Chromium instances in serverless Cloud Run for deep scanning.
 
 ---
-**DesignGuard** — Reclaiming 30% of the dev-cycle by automating the intuition of a Senior QA Engineer. 🚀
+**QA Testing Agent** — Reclaiming 30% of the dev-cycle by automating the intuition of a Senior QA Engineer. 🚀
