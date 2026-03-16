@@ -68,7 +68,7 @@ Attempts to interact with input fields, buttons, and forms. It detects broken wo
 ---
 ## 📂 Project Structure
 
-DesignGuard is organized into a clean, modular hierarchy for ease of development and deployment:
+Organized into a clean, modular hierarchy for ease of development and deployment:
 
 ```text
 ├── backend/            # FastAPI, LangGraph Orchestrator, & AI Agents
