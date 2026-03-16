@@ -66,6 +66,23 @@ Attempts to interact with input fields, buttons, and forms. It detects broken wo
 - **Infrastructure**: Dockerized Deployment on **Google Cloud Run**.
 
 ---
+## 📂 Project Structure
+
+DesignGuard is organized into a clean, modular hierarchy for ease of development and deployment:
+
+```text
+├── backend/            # FastAPI, LangGraph Orchestrator, & AI Agents
+│   ├── agent.py        # Core StateGraph Logic
+│   ├── visual_qa.py    # Gemini Vision Analysis
+│   ├── main.py         # API Endpoints & Static Serving
+│   └── ...            
+├── frontend/           # React + Vite Application
+│   ├── src/            # UI Components & State Management
+│   └── ...
+├── Dockerfile          # Production Container Definition
+├── deploy.sh           # Google Cloud Run Deployment Script
+└── README.md           # Master Documentation
+```
 
 ## 🚀 Reproducible Setup & Testing
 
