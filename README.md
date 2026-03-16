@@ -130,6 +130,8 @@ Access the UI at `http://localhost:8080`.
 5.  **Fix Check**: Click a Bug Card to see the AI-generated **CSS Fix** and **DevTools Command**.
 
 ---
+<img width="1917" height="860" alt="Screenshot 2026-03-17 023902" src="https://github.com/user-attachments/assets/4ece03a5-7b43-4af0-8bb4-b4da4de3ffc2" />
+
 
 ## 🏆 Accomplishments we're proud of
 - **Zero-Config QA**: No test scripts. No selector hunting. Just a URL.
