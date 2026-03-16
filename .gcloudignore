@@ -1,0 +1,15 @@
+.gcloudignore
+.git
+.gitignore
+node_modules/
+backend/__pycache__/
+.venv/
+.pytest_cache/
+.replit
+.replitignore
+replit.md
+deploy.sh
+verify_backend.py
+check_gemini.py
+test_report.pdf
+!artifacts/designguard/dist/public/
