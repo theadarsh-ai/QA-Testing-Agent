@@ -1,0 +1,25 @@
+packages:
+  "framer-motion": "For smooth page transitions and beautiful card reveals"
+  "react-syntax-highlighter": "To render the executable DevTools commands with proper syntax highlighting"
+  "@types/react-syntax-highlighter": "Type definitions for react-syntax-highlighter"
+  "date-fns": "For elegant date formatting in the history view"
+  "lucide-react": "For crisp, beautiful icons across the application"
+  "canvas-confetti": "For celebration effects when achieving 100% compliance"
+  "@types/canvas-confetti": "Type definitions for canvas-confetti"
+
+images:
+  - path: "artifacts/designguard/public/images/hero-bg.png"
+    description: "Abstract deep space navy background with glowing electric purple data lines and nodes, subtle glassmorphism effect"
+    aspect_ratio: "16:9"
+  - path: "artifacts/designguard/public/images/logo-icon.png"
+    description: "Minimalist shield icon with an eye inside, glowing electric purple on a transparent background, professional and high-tech"
+    aspect_ratio: "1:1"
+  - path: "artifacts/designguard/public/images/empty-history.png"
+    description: "Abstract 3D illustration of a glowing purple folder floating in dark space, high quality, minimal"
+    aspect_ratio: "1:1"
+
+notes:
+  - Using generated hooks from @workspace/api-client-react
+  - wouter is used for routing
+  - Scan state is managed via React Context to persist between Scan, Results, and Fix Executor pages
+  - Dark mode is forced by default as per the design requirements

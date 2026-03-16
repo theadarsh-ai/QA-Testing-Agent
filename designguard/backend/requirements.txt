@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+google-genai
+langgraph
+langchain-core
+pillow
+python-dotenv
+pydantic
+requests
+psycopg2-binary
+sqlalchemy
+playwright
+reportlab

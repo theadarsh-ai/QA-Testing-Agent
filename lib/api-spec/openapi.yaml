@@ -1,0 +1,331 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: DesignGuard API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: scans
+    description: Accessibility scan operations
+  - name: history
+    description: Scan history operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /scan:
+    post:
+      operationId: createScan
+      tags: [scans]
+      summary: Scan a website screenshot for accessibility violations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScanRequest"
+      responses:
+        "200":
+          description: Scan results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScanResult"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /apply-fix:
+    post:
+      operationId: applyFix
+      tags: [scans]
+      summary: Get fix details for a specific violation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplyFixRequest"
+      responses:
+        "200":
+          description: Fix details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FixDetail"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /history/{userId}:
+    get:
+      operationId: getUserHistory
+      tags: [history]
+      summary: Get scan history for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Scan history
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScanHistoryResponse"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+        - message
+
+    ScanRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        url:
+          type: string
+        screenshotBase64:
+          type: string
+      required:
+        - userId
+        - url
+        - screenshotBase64
+
+    FixAction:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [css_injection, attribute_injection, devtools_command]
+        property:
+          type: string
+        oldValue:
+          type: string
+        newValue:
+          type: string
+        devtoolsCommand:
+          type: string
+      required:
+        - type
+        - devtoolsCommand
+
+    Violation:
+      type: object
+      properties:
+        violationId:
+          type: string
+        category:
+          type: string
+          enum:
+            - COLOR_CONTRAST
+            - FONT_SIZE
+            - MISSING_ALT_TEXT
+            - KEYBOARD_FOCUS
+            - BUTTON_SIZE
+            - HEADING_STRUCTURE
+            - LINK_TEXT
+            - FORM_LABELS
+        severity:
+          type: string
+          enum: [critical, serious, moderate]
+        elementDescription:
+          type: string
+        wcagCriterion:
+          type: string
+        currentValue:
+          type: string
+        requiredValue:
+          type: string
+        fixDescription:
+          type: string
+        fixAction:
+          $ref: "#/components/schemas/FixAction"
+      required:
+        - violationId
+        - category
+        - severity
+        - elementDescription
+        - wcagCriterion
+        - fixDescription
+
+    AppliedFix:
+      type: object
+      properties:
+        violationId:
+          type: string
+        fixApplied:
+          type: boolean
+        devtoolsCommand:
+          type: string
+        explanation:
+          type: string
+        wcagCriterionMet:
+          type: string
+        complianceImprovement:
+          type: integer
+      required:
+        - violationId
+        - fixApplied
+        - devtoolsCommand
+        - explanation
+        - wcagCriterionMet
+        - complianceImprovement
+
+    ScanResult:
+      type: object
+      properties:
+        scanId:
+          type: string
+        violationsFound:
+          type: array
+          items:
+            $ref: "#/components/schemas/Violation"
+        fixesApplied:
+          type: array
+          items:
+            $ref: "#/components/schemas/AppliedFix"
+        complianceScoreBefore:
+          type: integer
+        complianceScoreAfter:
+          type: integer
+        totalViolations:
+          type: integer
+        criticalCount:
+          type: integer
+        seriousCount:
+          type: integer
+        moderateCount:
+          type: integer
+        pageSummary:
+          type: string
+      required:
+        - scanId
+        - violationsFound
+        - fixesApplied
+        - complianceScoreBefore
+        - complianceScoreAfter
+        - totalViolations
+        - criticalCount
+        - seriousCount
+        - moderateCount
+        - pageSummary
+
+    ApplyFixRequest:
+      type: object
+      properties:
+        scanId:
+          type: string
+        violationId:
+          type: string
+      required:
+        - scanId
+        - violationId
+
+    FixDetail:
+      type: object
+      properties:
+        actionType:
+          type: string
+        targetElement:
+          type: string
+        fixCode:
+          type: string
+        explanation:
+          type: string
+      required:
+        - actionType
+        - targetElement
+        - fixCode
+        - explanation
+
+    ScanSummary:
+      type: object
+      properties:
+        scanId:
+          type: string
+        url:
+          type: string
+        createdAt:
+          type: string
+        complianceScoreBefore:
+          type: integer
+        complianceScoreAfter:
+          type: integer
+        totalViolations:
+          type: integer
+        criticalCount:
+          type: integer
+        seriousCount:
+          type: integer
+        moderateCount:
+          type: integer
+        pageSummary:
+          type: string
+      required:
+        - scanId
+        - url
+        - createdAt
+        - complianceScoreBefore
+        - complianceScoreAfter
+        - totalViolations
+        - criticalCount
+        - seriousCount
+        - moderateCount
+        - pageSummary
+
+    ScanHistoryResponse:
+      type: object
+      properties:
+        scans:
+          type: array
+          items:
+            $ref: "#/components/schemas/ScanSummary"
+      required:
+        - scans
