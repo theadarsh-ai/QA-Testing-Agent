@@ -37,19 +37,23 @@ graph LR
 
 ## 🤖 Meet the Agents
 
-### 1. Visual QA Agent (Gemini 2.5 Vision)
+### 1. Orchestrator Agent: The "Brain" (handled by LangGraph).
+
+### 2. Autonomous Navigator: The "Hands" (Playwright-powered).
+
+### 3. Visual QA Agent (Gemini 2.5 Vision)
 The "Eyes" of the system. It uses **Gemini 2.5 Pro** to analyze screenshots for layout shifts, font inconsistencies, and color mismatches. It can even compare a live site against a **Figma Design Mockup** to identify design-to-code deviations.
 
-### 2. Autonomous Navigator (Playwright)
+### 4. Autonomous Navigator (Playwright)
 The "Body" of the system. It handles the heavy lifting of:
 - Deep crawling for hidden pages.
 - Interacting with infinite scrolls, modals, and dynamic menus.
 - Capturing network-level API failures (4xx/5xx) and console errors.
 
-### 3. Functional QA Agent
+### 5. Functional QA Agent
 Attempts to interact with input fields, buttons, and forms. It detects broken workflows and provides a "Success Path" audit for critical user journeys.
 
-### 4. Accessibility & Security Shield
+### 6. Accessibility & Security Shield
 - **A11y**: Injects `axe-core` to find WCAG 2.1 violations with 100% accuracy.
 - **Security**: Runs shallow fuzzing for common vulnerabilities like reflected XSS and SQL injection patterns in input fields.
 
